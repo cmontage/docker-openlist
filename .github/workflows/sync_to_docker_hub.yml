@@ -15,8 +15,8 @@ jobs:
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets::DOCKERHUB_USERNAME }}
-          password: ${{ secrets::DOCKERHUB_TOKEN }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       # Step 2: 拉取、改名并推送镜像
       # 注意：请把 "原作者/openlist" 替换为你想同步的实际原版镜像名
@@ -26,9 +26,9 @@ jobs:
           docker pull openlistteam/openlist:latest
           
           # 2. 为镜像打上你自己的 Docker Hub 标签
-          docker tag openlistteam/openlist:latest ${{ secrets::DOCKERHUB_USERNAME }}/openlist:latest
+          docker tag openlistteam/openlist:latest ${{ secrets.DOCKERHUB_USERNAME }}/openlist:latest
           
           # 3. 推送到你自己的仓库
-          docker push ${{ secrets::DOCKERHUB_USERNAME }}/openlist:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/openlist:latest
           
           echo "同步完成！"
